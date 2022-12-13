@@ -14,10 +14,7 @@ namespace BattleTank
 
 		private void Start()
 		{
-			for(int i = 0; i < 5; i++)
-			{
-				SpawnTank();
-			}
+			SpawnTank();
 		}
 
 		private void SpawnTank()
