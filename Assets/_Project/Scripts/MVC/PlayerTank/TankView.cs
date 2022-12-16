@@ -4,7 +4,8 @@ namespace BattleTank
 {
     public class TankView : MonoBehaviour
     {
-        TankController tankController;
+        private TankController tankController;
+		public TankTypes tankTypes;
 		public void SetController(TankController _tankController)
 		{
 			tankController = _tankController;
