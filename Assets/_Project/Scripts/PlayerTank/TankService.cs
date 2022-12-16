@@ -7,11 +7,6 @@ namespace BattleTank
 		[SerializeField] TankView spawnTank;
 		TankController tankController;
 
-		protected override void Awake()
-		{
-			base.Awake();
-		}
-
 		private void Start()
 		{
 			SpawnTank();
