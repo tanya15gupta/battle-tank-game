@@ -4,7 +4,6 @@ namespace BattleTank
 {
     public class TankModel 
     {
-        //public TankScriptableObject _tankSO;
         public float tankSpeed { get; private set; }
         public float tankHealth { get; private set; }
         public float damageDealt { get; private set; }

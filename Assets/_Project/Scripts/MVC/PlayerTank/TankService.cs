@@ -5,7 +5,6 @@ namespace BattleTank
 	public class TankService : GenericSingleton<TankService>
 	{
 		[SerializeField] private TankView tankPrefab;
-		//[SerializeField] private int setTankSpeed = 40;
 		[SerializeField] private FixedJoystick fixedJoystick;
 		[SerializeField] private TankObjectsList tankSoList;
 		private TankScriptableObject tankSO;
