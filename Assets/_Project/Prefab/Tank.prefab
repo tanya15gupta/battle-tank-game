@@ -279,7 +279,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3696528530143186007}
-  m_LocalRotation: {x: 0.000000021855694, y: 0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -300,7 +300,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd97bb0bb4822464fb6e7b4d5847b1d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tankTypes: 1
+  TankRigidbody: {fileID: 8419358176169387321}
+  tankMaterial: {fileID: 2100000, guid: 40cd3bb613978914cb43281766dacb24, type: 2}
 --- !u!65 &3549860390273295326
 BoxCollider:
   m_ObjectHideFlags: 0

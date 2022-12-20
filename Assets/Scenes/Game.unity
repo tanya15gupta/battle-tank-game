@@ -159,8 +159,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 814cf84af1bd1f045bc9604c76257b4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnTank: {fileID: 1405770949413570407, guid: 6bcc0bf0fb59f514995a741a25213f08,
+  tankPrefab: {fileID: 1405770949413570407, guid: 6bcc0bf0fb59f514995a741a25213f08,
     type: 3}
+  fixedJoystick: {fileID: 1246793896}
+  tankSoList: {fileID: 11400000, guid: 57fd4a23c7bb6974cacb89dcb9370bab, type: 2}
+  tankSO: {fileID: 11400000, guid: 823099966c549d245b86686d2634f141, type: 2}
 --- !u!4 &479644944
 Transform:
   m_ObjectHideFlags: 0
@@ -217,6 +220,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0aac6aef14f064c3fb626270cff2683b, type: 3}
+--- !u!114 &1246793896 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2929252283123773951, guid: aaa2c939c0359ac4dbce3f49e8b90252,
+    type: 3}
+  m_PrefabInstance: {fileID: 1574537054}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45977bbae16431c46a013576a1aea384, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1282556331
 GameObject:
   m_ObjectHideFlags: 0
@@ -791,7 +806,7 @@ PrefabInstance:
     - target: {fileID: 2929252283123773939, guid: aaa2c939c0359ac4dbce3f49e8b90252,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2929252285020697096, guid: aaa2c939c0359ac4dbce3f49e8b90252,
         type: 3}

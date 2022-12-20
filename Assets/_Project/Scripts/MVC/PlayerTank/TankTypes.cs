@@ -1,8 +1,8 @@
 ﻿
 public enum TankTypes
 {
-	None = 1,
-	Red = 2,
-	Green = 3,
-	Blue = 4
+	None = 0,
+	Red = 1,
+	Green = 2,
+	Blue = 3
 }

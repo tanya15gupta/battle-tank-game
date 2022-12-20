@@ -4,18 +4,21 @@ namespace BattleTank
 {
 	public class TankService : GenericSingleton<TankService>
 	{
-		[SerializeField] private TankView spawnTank;
-		[SerializeField] private int setTankSpeed = 40;
+		[SerializeField] private TankView tankPrefab;
+		//[SerializeField] private int setTankSpeed = 40;
+		[SerializeField] private FixedJoystick fixedJoystick;
+		[SerializeField] private TankObjectsList tankSoList;
+		private TankScriptableObject tankSO;
 		private TankController tankController;
-
 		private void Start()
 		{
-			SpawnTank();
+			tankController = new TankController(new TankModel(TankRandomizer()), tankPrefab, fixedJoystick);
 		}
-
-		private void SpawnTank()
+		private TankScriptableObject TankRandomizer()
 		{
-			tankController = new TankController(spawnTank.tankTypes, new TankModel(spawnTank.tankTypes, setTankSpeed), spawnTank);
+			int index = Random.Range(0, tankSoList.list.Count - 1);
+			tankSO = tankSoList.list[index];
+			return tankSO;
 		}
 	}
 }
