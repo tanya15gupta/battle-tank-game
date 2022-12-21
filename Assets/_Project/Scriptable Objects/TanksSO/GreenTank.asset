@@ -17,4 +17,4 @@ MonoBehaviour:
   damageDealt: 100
   speed: 500
   health: 50
-  tankColour: {r: 0.24313727, g: 0.47450984, b: 0.30980393, a: 0}
+  tankMaterial: {fileID: 2100000, guid: 7f0353c5e59b7ee49bc9801eda7aa3cd, type: 2}

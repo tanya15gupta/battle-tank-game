@@ -12,6 +12,7 @@ namespace BattleTank
 		{
 			tankModel = _tankModel;
 			tankView = GameObject.Instantiate<TankView>(_tankView);
+			ChangeTankColour();
 			joystick = _joystick;
 			moveDirection = Vector3.zero;
 			tankView.SetController(this);
@@ -19,14 +20,17 @@ namespace BattleTank
 
 		public void ChangeTankColour()
 		{
-			tankView.tankMaterial.color = tankModel.tankColour;
+			for(int i = 0; i < tankView.GetTankBody().childCount; i++)
+			{
+				tankView.GetTankBody().GetChild(i).GetComponent<MeshRenderer>().material = tankModel.tankMaterial;
+			}
 		}
 
 		public void MoveTank()
 		{
 			moveDirection.x = joystick.Horizontal;
 			moveDirection.z = joystick.Vertical;
-			tankView.TankRigidbody.velocity = moveDirection * tankModel.tankSpeed * Time.fixedDeltaTime;
+			tankView.GetRigidbody().velocity = moveDirection * tankModel.tankSpeed * Time.fixedDeltaTime;
 			if(moveDirection != Vector3.zero)
 				tankView.transform.forward = (moveDirection);
 		}

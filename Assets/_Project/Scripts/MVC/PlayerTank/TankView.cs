@@ -5,21 +5,18 @@ namespace BattleTank
 {
     public class TankView : MonoBehaviour
     {
-		private Rigidbody tankRigidbody;
-
         private TankController tankController;
-		public Rigidbody TankRigidbody;
-		public Material tankMaterial;
+		[SerializeField] private Rigidbody tankRigidbody;
+		[SerializeField] private Transform tankBody;
 
-		private void Start()
-		{
-			tankRigidbody = TankRigidbody;
-			tankController.ChangeTankColour();
-		}
 		private void FixedUpdate()
 		{
 			tankController.MoveTank();
 		}
+
+		public Rigidbody GetRigidbody() => tankRigidbody;
+
+		public Transform GetTankBody() => tankBody;
 
 		public void SetController(TankController _tankController)
 		{

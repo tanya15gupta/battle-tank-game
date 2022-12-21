@@ -9,12 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 671e9c1462101264d8a8995a9044581b, type: 3}
-  m_Name: BlueTank
+  m_Script: {fileID: 11500000, guid: 7e4b8b49f05479e449679915e8b4b407, type: 3}
+  m_Name: ListOfBulletTypes
   m_EditorClassIdentifier: 
-  tankName: 
-  tankType: 3
-  damageDealt: 75
-  speed: 750
-  health: 100
-  tankMaterial: {fileID: 2100000, guid: ff21ff0ea9b18924bb1fdfbb0e58f5cb, type: 2}
+  bulletsList:
+  - {fileID: 11400000, guid: b4288ddc7c3cf564787f77fea33ae592, type: 2}
+  - {fileID: 11400000, guid: aaf83cb57a1c81c4f99f78bb75f45443, type: 2}

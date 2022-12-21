@@ -10,6 +10,6 @@ namespace BattleTank
         public float damageDealt;
         public float speed;
         public float health;
-        public Color tankColour;
+        public Material tankMaterial;
     }
 }

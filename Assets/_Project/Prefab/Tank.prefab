@@ -332,8 +332,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd97bb0bb4822464fb6e7b4d5847b1d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TankRigidbody: {fileID: 8419358176169387321}
-  tankMaterial: {fileID: 2100000, guid: 40cd3bb613978914cb43281766dacb24, type: 2}
+  tankRigidbody: {fileID: 8419358176169387321}
+  tankBody: {fileID: 3696528530143678907}
 --- !u!65 &3549860390273295326
 BoxCollider:
   m_ObjectHideFlags: 0

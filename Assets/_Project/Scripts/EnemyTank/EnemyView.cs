@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace BattleTank
 {
-	public class EnemyTank : GenericSingleton<EnemyTank>
+	public class EnemyView : MonoBehaviour
 	{
 		private void Awake()
 		{
