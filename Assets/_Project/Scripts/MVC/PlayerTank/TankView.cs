@@ -1,10 +1,11 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace BattleTank
 {
     public class TankView : MonoBehaviour
     {
-		 private Rigidbody tankRigidbody;
+		private Rigidbody tankRigidbody;
 
         private TankController tankController;
 		public Rigidbody TankRigidbody;

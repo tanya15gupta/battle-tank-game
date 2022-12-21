@@ -10,10 +10,10 @@ namespace BattleTank
 		public FixedJoystick joystick { get; private set; }
 		public TankController(TankModel _tankModel, TankView _tankView, FixedJoystick _joystick)
 		{
-			moveDirection = Vector3.zero;
-			joystick = _joystick;
 			tankModel = _tankModel;
 			tankView = GameObject.Instantiate<TankView>(_tankView);
+			joystick = _joystick;
+			moveDirection = Vector3.zero;
 			tankView.SetController(this);
 		}
 
