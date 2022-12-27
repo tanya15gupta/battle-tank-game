@@ -2,27 +2,28 @@ using UnityEngine;
 
 namespace BattleTank
 {
-	public class TankView : MonoBehaviour
+	public class EnemyView : MonoBehaviour
 	{
-		private TankController tankController;
 		[SerializeField] private Rigidbody tankRigidbody;
 		[SerializeField] private Transform tankBody;
 		[SerializeField] private Transform bulletSpawnPoint;
+		private EnemyController enemyTankController;
 
 		private void FixedUpdate()
 		{
-			tankController.MoveTank();
+			enemyTankController.MoveTankAI();
+			enemyTankController.ShootTank();
 		}
 
 		public Rigidbody GetRigidbody() => tankRigidbody;
 
 		public Transform GetTankBody() => tankBody;
 
-		public Transform GetBulletSpawnPoint() => bulletSpawnPoint;
+		public Transform GetBulletSpawnTransform() => bulletSpawnPoint;
 
-		public void SetController(TankController _tankController)
+		public void SetController(EnemyController _enemyTankController)
 		{
-			tankController = _tankController;
+			enemyTankController = _enemyTankController;
 		}
 	}
 }

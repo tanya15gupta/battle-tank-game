@@ -7,17 +7,21 @@ namespace BattleTank
 		private TankModel tankModel;
 		private TankView tankView;
 		private Vector3 moveDirection;
-		public FixedJoystick joystick { get; private set; }
-		public TankController(TankModel _tankModel, TankView _tankView, FixedJoystick _joystick)
+		private FixedJoystick joystick;
+		private Transform tankSpawnPoint;
+
+		public TankController(TankModel _tankModel, TankView _tankView, FixedJoystick _joystick, Transform _spawnPoint)
 		{
 			tankModel = _tankModel;
-			tankView = GameObject.Instantiate<TankView>(_tankView);
+			tankSpawnPoint = _spawnPoint;
+			tankView = GameObject.Instantiate<TankView>(_tankView, tankSpawnPoint);
 			ChangeTankColour();
 			joystick = _joystick;
 			moveDirection = Vector3.zero;
 			tankView.SetController(this);
 		}
-
+		public Transform GetTankTransform() => tankView.transform;
+		public Transform GetBulletSpawnTransform() => tankView.GetBulletSpawnPoint();
 		public void ChangeTankColour()
 		{
 			for(int i = 0; i < tankView.GetTankBody().childCount; i++)
@@ -34,5 +38,6 @@ namespace BattleTank
 			if(moveDirection != Vector3.zero)
 				tankView.transform.forward = (moveDirection);
 		}
+
 	}
 }

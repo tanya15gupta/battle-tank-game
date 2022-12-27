@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a0e7766048d8134f9abfdc4530feeb2, type: 3}
   m_Name: FastBullet
   m_EditorClassIdentifier: 
-  speed: 2000
+  speed: 5000
   damageDone: 50
   shotsFired: 2
