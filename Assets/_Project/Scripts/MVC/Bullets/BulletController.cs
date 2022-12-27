@@ -25,11 +25,6 @@ namespace BattleTank.Bullet
 			bulletPrefab = GameObject.Instantiate<BulletView>(bulletView, _bulletSpawnPoint);
 			bulletDirection = bulletPrefab.transform.forward;
 			bulletPrefab.GetBulletRigidBody().AddForce(bulletDirection * bulletModel.speed * Time.deltaTime,ForceMode.Impulse);
-			/*for (int i = 0; i < bulletModel.shotsFired; i++)
-			{
-				bullets[i] = GameObject.Instantiate<BulletView>(bulletView, bulletSpawnPoint);
-				bullets[i].GetBulletRigidBody().AddForce(Vector3.forward, ForceMode.Impulse);
-			}*/
 		}
 	}
 }

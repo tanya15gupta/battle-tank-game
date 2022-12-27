@@ -30,6 +30,13 @@ namespace BattleTank
 			}
 		}
 
+		public bool IsAlive()
+		{
+			if (tankModel.tankHealth <= 0)
+				return false;
+			return true;
+		}
+
 		public void MoveTank()
 		{
 			moveDirection.x = joystick.Horizontal;

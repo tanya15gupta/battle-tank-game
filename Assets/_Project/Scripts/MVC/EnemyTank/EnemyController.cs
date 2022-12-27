@@ -9,8 +9,12 @@ namespace BattleTank
 		private Transform tankSpawnPoint;
 		private Transform playerTankPosition;
 		private float distanceBetweenPlayerAndEnemy;
+		float shootCooldown;
+		private float resetCooldownTime;
 		public EnemyController(TankModel _enemyModel, EnemyView _enemyTankView, Transform _spawnPoint, Transform _playerTankPosition)
 		{
+			resetCooldownTime = 2.0f;
+			shootCooldown = resetCooldownTime;
 			enemyModel = _enemyModel;
 			tankSpawnPoint = _spawnPoint;
 			enemyTankView = GameObject.Instantiate<EnemyView>(_enemyTankView, tankSpawnPoint);
@@ -18,6 +22,7 @@ namespace BattleTank
 			playerTankPosition = _playerTankPosition;
 			enemyTankView.SetController(this);
 		}
+		public Transform GetBulletSpawnTransform() => enemyTankView.GetBulletSpawnPoint();
 
 		public void ChangeTankColour()
 		{
@@ -47,9 +52,11 @@ namespace BattleTank
 
 		public void ShootTank()
 		{
-			if (GetDistanceBetweenTankAndEnemy() <= 7)
+			shootCooldown -= Time.deltaTime;
+			if (GetDistanceBetweenTankAndEnemy() <= 7 && shootCooldown <= 0)
 			{
-				BulletService.instance.ShootTank(enemyTankView.GetBulletSpawnTransform());
+				shootCooldown = resetCooldownTime;
+				BulletService.instance.ShootTank(GetBulletSpawnTransform());
 			}
 		}
 	}
