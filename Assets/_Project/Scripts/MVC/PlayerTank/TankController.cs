@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 namespace BattleTank
@@ -22,7 +23,7 @@ namespace BattleTank
 		}
 		public Transform GetTankTransform() => tankView.transform;
 		public Transform GetBulletSpawnTransform() => tankView.GetBulletSpawnPoint();
-		public void ChangeTankColour()
+		private void ChangeTankColour()
 		{
 			for(int i = 0; i < tankView.GetTankBody().childCount; i++)
 			{
@@ -46,5 +47,10 @@ namespace BattleTank
 				tankView.transform.forward = (moveDirection);
 		}
 
+		public void PlayerHit()
+		{
+			DestroyScene.instance.SceneDestruction(tankView.gameObject);
+			//Object.Destroy(tankView.gameObject);
+		}
 	}
 }

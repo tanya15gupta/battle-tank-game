@@ -10,6 +10,11 @@ namespace BattleTank
 			tankController.MoveTank();
 		}
 
+		public void PlayerGotHit()
+		{
+			tankController.PlayerHit();
+		}
+
 		public void SetController(TankController _tankController)
 		{
 			tankController = _tankController;

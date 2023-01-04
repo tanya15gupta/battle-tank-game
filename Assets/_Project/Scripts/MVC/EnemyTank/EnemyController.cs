@@ -9,7 +9,9 @@ namespace BattleTank
 		private Transform tankSpawnPoint;
 		private Transform playerTankPosition;
 		private float distanceBetweenPlayerAndEnemy;
-		float shootCooldown;
+		private float minDistance;
+		private float maxDistance;
+		private float shootCooldown;
 		private float resetCooldownTime;
 		public EnemyController(TankModel _enemyModel, EnemyView _enemyTankView, Transform _spawnPoint, Transform _playerTankPosition)
 		{
@@ -20,11 +22,13 @@ namespace BattleTank
 			enemyTankView = GameObject.Instantiate<EnemyView>(_enemyTankView, tankSpawnPoint);
 			ChangeTankColour();
 			playerTankPosition = _playerTankPosition;
+			minDistance = 7;
+			maxDistance = 50;
 			enemyTankView.SetController(this);
 		}
 		public Transform GetBulletSpawnTransform() => enemyTankView.GetBulletSpawnPoint();
 
-		public void ChangeTankColour()
+		private void ChangeTankColour()
 		{
 			for (int i = 0; i < enemyTankView.GetTankBody().childCount; i++)
 			{
@@ -32,18 +36,22 @@ namespace BattleTank
 			}
 		}
 
-		public float GetDistanceBetweenTankAndEnemy()
+		private float GetDistanceBetweenTankAndEnemy()
 		{
-			distanceBetweenPlayerAndEnemy = Vector3.Distance(playerTankPosition.position, enemyTankView.transform.position);
-			return distanceBetweenPlayerAndEnemy;
+			if(playerTankPosition != null)
+			{
+				distanceBetweenPlayerAndEnemy = Vector3.Distance(playerTankPosition.position, enemyTankView.transform.position);
+				return distanceBetweenPlayerAndEnemy;
+			}
+			return Mathf.Infinity;
 		}
 
 		public void MoveTankAI()
 		{
-			if (GetDistanceBetweenTankAndEnemy() < 50)
+			if (GetDistanceBetweenTankAndEnemy() < maxDistance)
 			{
 				enemyTankView.transform.LookAt(playerTankPosition);
-				if (GetDistanceBetweenTankAndEnemy() > 7)
+				if (GetDistanceBetweenTankAndEnemy() > minDistance)
 					enemyTankView.GetRigidbody().velocity = enemyTankView.transform.forward * enemyModel.tankSpeed * Time.deltaTime;
 				else
 					enemyTankView.GetRigidbody().velocity = Vector3.zero;
@@ -53,10 +61,13 @@ namespace BattleTank
 		public void ShootTank()
 		{
 			shootCooldown -= Time.deltaTime;
-			if (GetDistanceBetweenTankAndEnemy() <= 7 && shootCooldown <= 0)
+			if (shootCooldown <= 0)
 			{
-				shootCooldown = resetCooldownTime;
-				BulletService.instance.ShootTank(GetBulletSpawnTransform());
+				if (GetDistanceBetweenTankAndEnemy() <= minDistance)
+				{
+					shootCooldown = resetCooldownTime;
+					BulletService.instance.ShootTank(GetBulletSpawnTransform());
+				}
 			}
 		}
 	}
