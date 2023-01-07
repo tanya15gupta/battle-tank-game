@@ -11,11 +11,11 @@ namespace BattleTank
 		public TankTypes tankTypes { get; private set; }
 		public TankModel(TankScriptableObject _tankSO)
 		{
-			tankSpeed = _tankSO.speed;
-			tankTypes = _tankSO.tankType;
-			tankHealth = _tankSO.health;
-			damageDealt = _tankSO.damageDealt;
-			tankMaterial = _tankSO.tankMaterial;
+			tankSpeed = _tankSO.Speed;
+			tankTypes = _tankSO.TankType;
+			tankHealth = _tankSO.Health;
+			damageDealt = _tankSO.DamageDealt;
+			tankMaterial = _tankSO.TankMaterial;
 		}
 
 	}

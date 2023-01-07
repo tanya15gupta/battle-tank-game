@@ -296,6 +296,7 @@ GameObject:
   - component: {fileID: 3549860390273295326}
   - component: {fileID: 8419358176169387321}
   - component: {fileID: -2646259903476124866}
+  - component: {fileID: -6335057120085779894}
   m_Layer: 0
   m_Name: Enemytank
   m_TagString: Untagged
@@ -364,6 +365,28 @@ MonoBehaviour:
   tankRigidbody: {fileID: 8419358176169387321}
   tankBody: {fileID: 3696528530143678907}
   bulletSpawnPoint: {fileID: 817899461898782479}
+--- !u!195 &-6335057120085779894
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3696528530143186007}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &3696528530143186011
 GameObject:
   m_ObjectHideFlags: 0
