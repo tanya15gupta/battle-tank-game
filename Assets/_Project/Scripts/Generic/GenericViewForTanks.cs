@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace BattleTank
 {
+	[RequireComponent(typeof(Rigidbody))]
     public class GenericViewForTanks : MonoBehaviour
     {
 		[SerializeField] protected Rigidbody tankRigidbody;

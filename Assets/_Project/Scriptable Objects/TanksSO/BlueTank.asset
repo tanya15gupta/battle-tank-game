@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tankName: 
   tankType: 3
-  damageDealt: 75
+  damageDealt: 750
   speed: 750
-  health: 100
-  tankMaterial: {fileID: 2100000, guid: ff21ff0ea9b18924bb1fdfbb0e58f5cb, type: 2}
+  health: 50
+  tankMaterial: {fileID: 2100000, guid: f1f32d23dafbeba4d9837ca6d322bdc9, type: 2}
