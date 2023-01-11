@@ -20,9 +20,9 @@ namespace BattleTank.Bullet
 		}
 		private void OnCollisionEnter(Collision collision)
 		{
-			if (collision.gameObject.TryGetComponent<TankView>(out TankView component))
+			if (collision.gameObject.TryGetComponent<GenericViewForTanks>(out GenericViewForTanks component))
 			{
-				component.PlayerGotHit();
+				component.TankGotHit();
 			}
 			Destroy(gameObject);
 		}

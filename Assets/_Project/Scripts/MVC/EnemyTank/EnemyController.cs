@@ -5,27 +5,35 @@ namespace BattleTank
 {
 	public class EnemyController
 	{
-		private Transform tankSpawnPoint;
 		private EnemyStateMachine enemyState;
 		private EnemyView enemyTankView;
 		private EnemyModel enemyModel;
-		private Transform playerTankPosition;
-		public EnemyController(EnemyModel _enemyModel, EnemyView _enemyTankView, Transform _spawnPoint, Transform _playerTankPosition)
+
+		public EnemyController(EnemyModel _enemyModel, EnemyView _enemyTankView, Transform _spawnPoint)
 		{
 			enemyModel = _enemyModel;
-			tankSpawnPoint = _spawnPoint;
-			enemyTankView = GameObject.Instantiate<EnemyView>(_enemyTankView, tankSpawnPoint);
+			enemyTankView = GameObject.Instantiate<EnemyView>(_enemyTankView, _spawnPoint);
 			ChangeTankColour();
 			enemyState = new IdleState(this);
 			enemyTankView.SetController(this);
-			playerTankPosition = _playerTankPosition;
 		}
+
 		public Transform GetBulletSpawnTransform() => enemyTankView.GetBulletSpawnPoint();
+
 		public List<Transform> GetPatrolPoints() => enemyModel.PatrolPoints;
-		public Transform GetPlayerTankPosition() => playerTankPosition;
+
+		public float GetShootingDisstance() => enemyModel.ShootingDistance;
+
+		public float GetDetectionRadius() => enemyModel.ChasingRadius;
+
 		public Transform GetEnemyTankTransform() => enemyTankView.transform;
-		public NavMeshAgent GetNavMeshAgent() => enemyTankView.EnemyTankAgent();
+
 		public float GetTankSpeed() => enemyModel.tankSpeed;
+
+		public void EnemyReceivedHit() => enemyTankView.DestroySelf();
+
+		public NavMeshAgent GetNavmeshAgent() => enemyTankView.EnemyTankAgent();
+
 		private void ChangeTankColour()
 		{
 			for (int i = 0; i < enemyTankView.GetTankBody().childCount; i++)
@@ -33,9 +41,11 @@ namespace BattleTank
 				enemyTankView.GetTankBody().GetChild(i).GetComponent<MeshRenderer>().material = enemyModel.tankMaterial;
 			}
 		}
+
 		public void MoveTankAI()
 		{
 			enemyState = enemyState.Processing();
 		}
+
 	}
 }

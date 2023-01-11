@@ -1,6 +1,3 @@
-using UnityEngine;
-using UnityEngine.AI;
-using System.Collections.Generic;
 namespace BattleTank
 {
 	public class ChaseState : EnemyStateMachine
@@ -13,7 +10,7 @@ namespace BattleTank
 		}
 		public override void OnUpdate()
 		{
-			agent.SetDestination(enemyController.GetPlayerTankPosition().position);
+			agent.SetDestination(TankService.instance.PlayerPosition());
 			if(agent.hasPath)
 			{
 				if(IsPlayerInShootRange())

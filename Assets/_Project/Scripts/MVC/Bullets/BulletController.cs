@@ -7,7 +7,6 @@ namespace BattleTank.Bullet
 		private BulletModel bulletModel;
 		private BulletView bulletView;
 		private BulletView bulletPrefab;
-		private Transform bulletSpawnPoint;
 		private bool shootPressed;
 		private Vector3 bulletDirection;
 		public BulletController(BulletView _bulletView, BulletModel _bulletModel)

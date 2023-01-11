@@ -1,6 +1,4 @@
 using UnityEngine;
-using UnityEngine.AI;
-using System.Collections.Generic;
 namespace BattleTank
 {
 	public class IdleState : EnemyStateMachine

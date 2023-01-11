@@ -12,18 +12,16 @@ namespace BattleTank
 
         protected STATE stateName;
         protected EVENT currentStage;
-        protected GameObject enemyTank;
         protected EnemyStateMachine nextState;
         protected List<Transform> patrollingPoints;
-        protected NavMeshAgent agent;
         protected EnemyController enemyController;
-        protected float shootingDistance = 8.0f;
-        protected float visibilityDistance = 15.0f;
+        protected NavMeshAgent agent;
+
         public EnemyStateMachine(EnemyController _enemyController)
 		{
             enemyController = _enemyController;
+            agent = enemyController.GetNavmeshAgent();
             patrollingPoints = enemyController.GetPatrolPoints();
-            agent = enemyController.GetNavMeshAgent();
 		}
 
         public virtual void OnEnter()
@@ -54,15 +52,15 @@ namespace BattleTank
 		}
         public bool IsPlayerInChaseRange()
 		{
-            float distance = Vector3.Distance(enemyController.GetPlayerTankPosition().position, enemyController.GetEnemyTankTransform().position);
-            if (distance < visibilityDistance)
+            float distance = Vector3.Distance(TankService.instance.PlayerPosition(), enemyController.GetEnemyTankTransform().position);
+            if (distance < enemyController.GetDetectionRadius())
                 return true;
             return false;
 		}
         public bool IsPlayerInShootRange()
         {
-            float distance = Vector3.Distance(enemyController.GetPlayerTankPosition().position, enemyController.GetEnemyTankTransform().position);
-            if (distance < shootingDistance)
+            float distance = Vector3.Distance(TankService.instance.PlayerPosition(), enemyController.GetEnemyTankTransform().position);
+            if (distance < enemyController.GetShootingDisstance())
                 return true;
             return false;
         }

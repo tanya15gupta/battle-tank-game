@@ -1,6 +1,4 @@
 using UnityEngine;
-using UnityEngine.AI;
-using System.Collections.Generic;
 using BattleTank.Bullet;
 namespace BattleTank
 {
@@ -27,7 +25,7 @@ namespace BattleTank
 		}
 		private void ShootingPlayerTank()
 		{
-			enemyController.GetEnemyTankTransform().transform.LookAt(enemyController.GetPlayerTankPosition());
+			enemyController.GetEnemyTankTransform().LookAt(TankService.instance.PlayerPosition());
 			shootCooldown += Time.deltaTime;
 			if (shootCooldown >= 2.0f)
 			{

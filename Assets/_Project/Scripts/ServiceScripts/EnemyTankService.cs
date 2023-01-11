@@ -15,7 +15,7 @@ namespace BattleTank
 
 		private void SpawnEnemy()
 		{
-			enemyTankController = new EnemyController(new EnemyModel(TankRandomizer()), enemyTankPrefab, this.gameObject.transform, TankService.instance.PlayerPosition());
+			enemyTankController = new EnemyController(new EnemyModel(TankRandomizer()), enemyTankPrefab, this.gameObject.transform);
 		}
 
 		private TankScriptableObject TankRandomizer()

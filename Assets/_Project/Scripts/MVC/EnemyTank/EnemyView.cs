@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.AI;
-using System.Collections.Generic;
 
 namespace BattleTank
 {
@@ -8,21 +7,28 @@ namespace BattleTank
 	{
 		private EnemyController enemyTankController;
 		private NavMeshAgent agent;
-		private void Start()
-		{
-			agent = gameObject.GetComponent<NavMeshAgent>();
-			//patrollingPoints = enemyTankController.enemyPatrol;
-		}
+		public NavMeshAgent EnemyTankAgent() => agent;
 		public void SetController(EnemyController _enemyTankController)
 		{
 			enemyTankController = _enemyTankController;
 		}
-		public NavMeshAgent EnemyTankAgent() => agent;
+		private void Start()
+		{
+			agent = gameObject.GetComponent<NavMeshAgent>();
+		}
 		private void Update()
 		{
 			enemyTankController.MoveTankAI();
-			//enemyTankController.ShootTank();
 		}
 
+		public override void TankGotHit()
+		{
+			enemyTankController.EnemyReceivedHit();
+		}
+
+		public void DestroySelf()
+		{
+			Destroy(gameObject);
+		}
 	}
 }

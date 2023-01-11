@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using BattleTank.UI;
 
 namespace BattleTank
 {
@@ -8,20 +9,18 @@ namespace BattleTank
 		private TankModel tankModel;
 		private TankView tankView;
 		private Vector3 moveDirection;
-		private FixedJoystick joystick;
 		private Transform tankSpawnPoint;
 
-		public TankController(TankModel _tankModel, TankView _tankView, FixedJoystick _joystick, Transform _spawnPoint)
+		public TankController(TankModel _tankModel, TankView _tankView, Transform _spawnPoint)
 		{
 			tankModel = _tankModel;
 			tankSpawnPoint = _spawnPoint;
 			tankView = GameObject.Instantiate<TankView>(_tankView, tankSpawnPoint);
 			ChangeTankColour();
-			joystick = _joystick;
 			moveDirection = Vector3.zero;
 			tankView.SetController(this);
 		}
-		public Transform GetTankTransform() => tankView.transform;
+		public Vector3 GetTankTransform() => tankView.transform.position;
 		public Transform GetBulletSpawnTransform() => tankView.GetBulletSpawnPoint();
 		private void ChangeTankColour()
 		{
@@ -40,8 +39,8 @@ namespace BattleTank
 
 		public void MoveTank()
 		{
-			moveDirection.x = joystick.Horizontal;
-			moveDirection.z = joystick.Vertical;
+			moveDirection.x = UIService.instance.GetJoystickHorizontal();
+			moveDirection.z = UIService.instance.GetJoystickVertical();
 			tankView.GetRigidbody().velocity = moveDirection * tankModel.tankSpeed * Time.fixedDeltaTime;
 			if(moveDirection != Vector3.zero)
 				tankView.transform.forward = (moveDirection);
