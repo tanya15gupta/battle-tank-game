@@ -1,5 +1,5 @@
 using UnityEngine;
-using BattleTank.UI;
+using System;
 namespace BattleTank.Bullet
 {
 	public class BulletService : GenericSingleton<BulletService>
@@ -8,6 +8,7 @@ namespace BattleTank.Bullet
 		[SerializeField] private BulletList bulletSoList;
 		[SerializeField] private BulletSO bulletSO;
 		private BulletController bulletController;
+		public Action<int> OnBulletFired;
 
 		private void Start()
 		{
@@ -21,7 +22,7 @@ namespace BattleTank.Bullet
 
 		private BulletSO BulletRandomizer()
 		{
-			int index = Random.Range(0, bulletSoList.bulletsList.Count);
+			int index = UnityEngine.Random.Range(0, bulletSoList.bulletsList.Count);
 			bulletSO = bulletSoList.bulletsList[index];
 			return bulletSO;
 		}
