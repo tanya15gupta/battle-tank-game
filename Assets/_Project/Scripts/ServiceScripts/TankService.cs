@@ -7,16 +7,15 @@ namespace BattleTank
 	{
 		[SerializeField] private TankView tankPrefab;
 		[SerializeField] private TankObjectsList tankSoList;
-		[SerializeField] private CinemachineVirtualCamera virtualCamera;
 		private TankScriptableObject tankSO;
 		private TankController tankController;
 		private void Start()
 		{
-			tankController = new TankController(new TankModel(TankRandomizer()), tankPrefab, UIService.instance.GetJoystick(), this.gameObject.transform);
-			virtualCamera.Follow = tankController.GetTankTransform();
+			tankController = new TankController(new TankModel(TankRandomizer()), tankPrefab, this.gameObject.transform);
+			//virtualCamera.Follow = tankController.GetTankTransform();
 		}
 
-		public Transform PlayerPosition() => tankController.GetTankTransform();
+		public Vector3 PlayerPosition() => tankController.GetTankTransform();
 		public Transform GetBulletTransform() => tankController.GetBulletSpawnTransform();
 		private TankScriptableObject TankRandomizer()
 		{

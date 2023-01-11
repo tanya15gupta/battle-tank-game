@@ -12,5 +12,6 @@ namespace BattleTank
 		public Rigidbody GetRigidbody() => tankRigidbody;
 		public Transform GetBulletSpawnPoint() => bulletSpawnPoint;
 		public Transform GetTankBody() => tankBody;
+		public virtual void TankGotHit() { }
 	}
 }

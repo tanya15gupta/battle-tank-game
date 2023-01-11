@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AI;
 using BattleTank.Bullet;
 namespace BattleTank
 {
@@ -14,7 +15,7 @@ namespace BattleTank
 
 		private void SpawnEnemy()
 		{
-			enemyTankController = new EnemyController(new TankModel(TankRandomizer()), enemyTankPrefab, this.gameObject.transform, TankService.instance.PlayerPosition());
+			enemyTankController = new EnemyController(new EnemyModel(TankRandomizer()), enemyTankPrefab, this.gameObject.transform);
 		}
 
 		private TankScriptableObject TankRandomizer()

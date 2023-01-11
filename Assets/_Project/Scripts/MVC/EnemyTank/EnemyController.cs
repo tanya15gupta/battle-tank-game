@@ -1,32 +1,38 @@
 using UnityEngine;
-using BattleTank.Bullet;
+using System.Collections.Generic;
+using UnityEngine.AI;
 namespace BattleTank
 {
 	public class EnemyController
 	{
+		private StateBaseClass enemyState;
 		private EnemyView enemyTankView;
-		private TankModel enemyModel;
-		private Transform tankSpawnPoint;
-		private Transform playerTankPosition;
-		private float distanceBetweenPlayerAndEnemy;
-		private float minDistance;
-		private float maxDistance;
-		private float shootCooldown;
-		private float resetCooldownTime;
-		public EnemyController(TankModel _enemyModel, EnemyView _enemyTankView, Transform _spawnPoint, Transform _playerTankPosition)
+		private EnemyModel enemyModel;
+
+		public EnemyController(EnemyModel _enemyModel, EnemyView _enemyTankView, Transform _spawnPoint)
 		{
-			resetCooldownTime = 2.0f;
-			shootCooldown = resetCooldownTime;
 			enemyModel = _enemyModel;
-			tankSpawnPoint = _spawnPoint;
-			enemyTankView = GameObject.Instantiate<EnemyView>(_enemyTankView, tankSpawnPoint);
+			enemyTankView = GameObject.Instantiate<EnemyView>(_enemyTankView, _spawnPoint);
 			ChangeTankColour();
-			playerTankPosition = _playerTankPosition;
-			minDistance = 7;
-			maxDistance = 50;
+			enemyState = new IdleState(this);
 			enemyTankView.SetController(this);
 		}
+
 		public Transform GetBulletSpawnTransform() => enemyTankView.GetBulletSpawnPoint();
+
+		public List<Transform> GetPatrolPoints() => enemyModel.PatrolPoints;
+
+		public float GetShootingDisstance() => enemyModel.ShootingDistance;
+
+		public float GetDetectionRadius() => enemyModel.ChasingRadius;
+
+		public Transform GetEnemyTankTransform() => enemyTankView.transform;
+
+		public float GetTankSpeed() => enemyModel.tankSpeed;
+
+		public void EnemyReceivedHit() => enemyTankView.DestroySelf();
+
+		public NavMeshAgent GetNavmeshAgent() => enemyTankView.EnemyTankAgent();
 
 		private void ChangeTankColour()
 		{
@@ -36,39 +42,10 @@ namespace BattleTank
 			}
 		}
 
-		private float GetDistanceBetweenTankAndEnemy()
-		{
-			if(playerTankPosition != null)
-			{
-				distanceBetweenPlayerAndEnemy = Vector3.Distance(playerTankPosition.position, enemyTankView.transform.position);
-				return distanceBetweenPlayerAndEnemy;
-			}
-			return Mathf.Infinity;
-		}
-
 		public void MoveTankAI()
 		{
-			if (GetDistanceBetweenTankAndEnemy() < maxDistance)
-			{
-				enemyTankView.transform.LookAt(playerTankPosition);
-				if (GetDistanceBetweenTankAndEnemy() > minDistance)
-					enemyTankView.GetRigidbody().velocity = enemyTankView.transform.forward * enemyModel.tankSpeed * Time.deltaTime;
-				else
-					enemyTankView.GetRigidbody().velocity = Vector3.zero;
-			}
+			enemyState = enemyState.Processing();
 		}
 
-		public void ShootTank()
-		{
-			shootCooldown -= Time.deltaTime;
-			if (shootCooldown <= 0)
-			{
-				if (GetDistanceBetweenTankAndEnemy() <= minDistance)
-				{
-					shootCooldown = resetCooldownTime;
-					BulletService.instance.ShootTank(GetBulletSpawnTransform());
-				}
-			}
-		}
 	}
 }

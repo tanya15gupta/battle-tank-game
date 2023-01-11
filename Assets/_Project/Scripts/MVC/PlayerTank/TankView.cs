@@ -10,7 +10,7 @@ namespace BattleTank
 			tankController.MoveTank();
 		}
 
-		public void PlayerGotHit()
+		public override void TankGotHit()
 		{
 			tankController.PlayerHit();
 		}
