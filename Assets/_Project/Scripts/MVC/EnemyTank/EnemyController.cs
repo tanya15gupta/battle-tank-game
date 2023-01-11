@@ -5,7 +5,7 @@ namespace BattleTank
 {
 	public class EnemyController
 	{
-		private EnemyStateMachine enemyState;
+		private StateBaseClass enemyState;
 		private EnemyView enemyTankView;
 		private EnemyModel enemyModel;
 

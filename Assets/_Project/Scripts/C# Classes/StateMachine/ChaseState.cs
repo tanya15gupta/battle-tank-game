@@ -1,6 +1,6 @@
 namespace BattleTank
 {
-	public class ChaseState : EnemyStateMachine
+	public class ChaseState : StateBaseClass
 	{
 		public ChaseState(EnemyController _enemyController) : base(_enemyController)
 		{

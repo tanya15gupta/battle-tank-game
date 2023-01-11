@@ -1,7 +1,7 @@
 using UnityEngine;
 namespace BattleTank
 {
-	public class IdleState : EnemyStateMachine
+	public class IdleState : StateBaseClass
 	{
 		public IdleState(EnemyController _enemyController) : base(_enemyController)
 		{

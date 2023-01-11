@@ -2,7 +2,7 @@ using UnityEngine;
 using BattleTank.Bullet;
 namespace BattleTank
 {
-	public class ShootState : EnemyStateMachine
+	public class ShootState : StateBaseClass
 	{
 		private float shootCooldown;
 		public ShootState(EnemyController _enemyController) : base(_enemyController)

@@ -1,7 +1,7 @@
 
 namespace BattleTank
 {
-    public class PatrolState : EnemyStateMachine
+    public class PatrolState : StateBaseClass
 	{
 		private int currentIndex = -1;
 		public PatrolState(EnemyController _enemyController) : base(_enemyController)
