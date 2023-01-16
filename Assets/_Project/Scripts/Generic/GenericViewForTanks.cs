@@ -3,7 +3,7 @@ using UnityEngine;
 namespace BattleTank
 {
 	[RequireComponent(typeof(Rigidbody))]
-    public class GenericViewForTanks : MonoBehaviour
+    public abstract class GenericViewForTanks : MonoBehaviour
     {
 		[SerializeField] protected Rigidbody tankRigidbody;
 		[SerializeField] protected Transform tankBody;

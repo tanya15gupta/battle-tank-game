@@ -4,12 +4,10 @@ namespace BattleTank.Bullet
 {
 	public class BulletView : MonoBehaviour
 	{
-		[SerializeField] private float destroyTimer;
 		private Rigidbody bulletRigidBody;
 		private BulletController bulletController;
 		private void Awake()
 		{
-			destroyTimer = .8f;
 			bulletRigidBody = gameObject.GetComponent<Rigidbody>();
 		}
 		public Rigidbody GetBulletRigidBody() => bulletRigidBody;
@@ -18,20 +16,16 @@ namespace BattleTank.Bullet
 		{
 			bulletController = _bulletController;
 		}
+		public void ToggleActive(bool _isOn)
+		{
+			gameObject.SetActive(_isOn);
+		}
 		private void OnCollisionEnter(Collision collision)
 		{
 			if (collision.gameObject.TryGetComponent<GenericViewForTanks>(out GenericViewForTanks component))
 			{
 				component.TankGotHit();
 			}
-			Destroy(gameObject);
-		}
-
-		private void Update()
-		{
-			destroyTimer -= Time.deltaTime;
-			if (destroyTimer <= 0)
-				Destroy(gameObject);
 		}
 	}
 }

@@ -6,24 +6,26 @@ namespace BattleTank.Bullet
 	{
 		private BulletModel bulletModel;
 		private BulletView bulletView;
-		private BulletView bulletPrefab;
 		private bool shootPressed;
 		private Vector3 bulletDirection;
-		public BulletController(BulletView _bulletView, BulletModel _bulletModel)
+		public BulletController(BulletView _bulletPrfab, BulletModel _bulletModel)
 		{
 			bulletDirection = Vector3.zero;
 			bulletModel = _bulletModel;
-			bulletView = _bulletView;
+			bulletView = GameObject.Instantiate<BulletView>(_bulletPrfab);
 			bulletView.SetBulletController(this);
 		}
 
 		public bool IsShootPressed() => shootPressed;
-
+		public void SetVisible(bool _isActive)
+		{
+			bulletView.ToggleActive(_isActive);
+		}
 		public void ShootBullet(Transform _bulletSpawnPoint)
 		{
-			bulletPrefab = GameObject.Instantiate<BulletView>(bulletView, _bulletSpawnPoint);
-			bulletDirection = bulletPrefab.transform.forward;
-			bulletPrefab.GetBulletRigidBody().AddForce(bulletDirection * bulletModel.speed * Time.deltaTime,ForceMode.Impulse);
+			bulletView.transform.SetPositionAndRotation(_bulletSpawnPoint.position, _bulletSpawnPoint.rotation);
+			bulletDirection = bulletView.transform.forward;
+			bulletView.GetBulletRigidBody().AddForce(bulletDirection * bulletModel.speed * Time.deltaTime,ForceMode.Impulse);
 		}
 	}
 }

@@ -762,6 +762,7 @@ GameObject:
   m_Component:
   - component: {fileID: 951669937}
   - component: {fileID: 951669938}
+  - component: {fileID: 951669939}
   m_Layer: 0
   m_Name: BulletService
   m_TagString: Untagged
@@ -799,7 +800,19 @@ MonoBehaviour:
   bulletPrefab: {fileID: 3023899211034245405, guid: 1947a26a3cef0514ba68032c491fb2e0,
     type: 3}
   bulletSoList: {fileID: 11400000, guid: 9e7e379e4c425fa408f3a3fcb43ba039, type: 2}
-  bulletSO: {fileID: 0}
+  waitTime: 2
+--- !u!114 &951669939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 951669936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 941da78eda4bf7749bc5b2a8c4bb57f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &967664761
 GameObject:
   m_ObjectHideFlags: 0
