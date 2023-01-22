@@ -24,3 +24,4 @@ MonoBehaviour:
   - {fileID: 5057514606534622726, guid: 8a7511f7e5e15cd44bda16af7ab5bfea, type: 3}
   - {fileID: 1819447978936571108, guid: 361333afb3fa6cd4e923cc8f7eddcc04, type: 3}
   - {fileID: 1266284123379161317, guid: 7212863e43b9a2e41a5ec5bf2a9e6702, type: 3}
+  shootCoolDown: 8

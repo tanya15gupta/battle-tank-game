@@ -15,6 +15,7 @@ namespace BattleTank
 		[SerializeField] private float aIShootingDistance;
 		[SerializeField] private float aIVisibilityRadius;
 		[SerializeField] private List<Transform> checkPoints = new List<Transform>();
+		[SerializeField] private float shootCoolDown;
 		public string TankName					{ get => tankName; set => tankName = value; }
 		public float DamageDealt				{ get => damageDealt; set => damageDealt = value; }
 		public float Speed						{ get => speed; set => speed = value; }
@@ -24,5 +25,7 @@ namespace BattleTank
 		public Material TankMaterial			{ get => tankMaterial; set => tankMaterial = value; }
 		public TankTypes TankType				{ get => tankType; set => tankType = value; }
 		public List<Transform> CheckPoints		{ get => checkPoints; set => checkPoints = value; }
+		public float ShootCoolDown				{ get => shootCoolDown; set => shootCoolDown = value; }
+
 	}
 }

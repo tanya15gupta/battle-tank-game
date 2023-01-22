@@ -16,7 +16,6 @@ namespace BattleTank
 		{
 			PooledItems<T> pooledItem  = itemsInPool.Find(item => item.item.Equals(_item));
 			pooledItem.isUsed = false;
-			Debug.Log(itemsInPool.Count);
 			return;
 		}
 

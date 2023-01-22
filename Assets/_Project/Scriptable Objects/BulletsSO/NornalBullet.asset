@@ -14,4 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 4000
   damageDone: 50
+  lifeTime: 3
   shotsFired: 3
+  explosionParticalsEffect: {fileID: 195792, guid: 89e78efe92dfe5a42837b392cdb0bf9e,
+    type: 3}

@@ -6,26 +6,40 @@ namespace BattleTank.Bullet
 	{
 		private Rigidbody bulletRigidBody;
 		private BulletController bulletController;
+		private Coroutine bulletRoutine;
+		
+		public Rigidbody GetBulletRigidBody() => bulletRigidBody;
 		private void Awake()
 		{
 			bulletRigidBody = gameObject.GetComponent<Rigidbody>();
 		}
-		public Rigidbody GetBulletRigidBody() => bulletRigidBody;
 
-		public void SetBulletController(BulletController _bulletController)
+		private void Update()
 		{
-			bulletController = _bulletController;
+ 			bulletRoutine = StartCoroutine(bulletController.ReturnBulletRoutine());
 		}
+		private void OnCollisionEnter(Collision collision)
+		{
+ 			bulletRoutine = StartCoroutine(bulletController.ReturnBulletRoutine());
+			bulletController.SetObjectInteractable(false);
+			if (collision.gameObject.TryGetComponent<GenericViewForTanks>(out GenericViewForTanks component))
+			{
+				component.DestroyTank();
+			}
+			//bulletController.ReturnBulletToPool();
+		}
+		private void OnDestroy()
+		{
+			StopCoroutine(bulletRoutine);
+		}
+
 		public void ToggleActive(bool _isOn)
 		{
 			gameObject.SetActive(_isOn);
 		}
-		private void OnCollisionEnter(Collision collision)
+		public void SetController(BulletController _bulletController)
 		{
-			if (collision.gameObject.TryGetComponent<GenericViewForTanks>(out GenericViewForTanks component))
-			{
-				component.TankGotHit();
-			}
+			bulletController = _bulletController;
 		}
 	}
 }

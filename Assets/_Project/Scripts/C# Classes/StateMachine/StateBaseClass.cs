@@ -50,19 +50,5 @@ namespace BattleTank
 			}
             return this;
 		}
-        public bool IsPlayerInChaseRange()
-		{
-            float distance = Vector3.Distance(TankService.instance.PlayerPosition(), enemyController.GetEnemyTankTransform().position);
-            if (distance < enemyController.GetDetectionRadius())
-                return true;
-            return false;
-		}
-        public bool IsPlayerInShootRange()
-        {
-            float distance = Vector3.Distance(TankService.instance.PlayerPosition(), enemyController.GetEnemyTankTransform().position);
-            if (distance < enemyController.GetShootingDisstance())
-                return true;
-            return false;
-        }
     }
 }

@@ -1,6 +1,5 @@
 using UnityEngine;
 using System;
-using System.Collections;
 
 namespace BattleTank.Bullet
 {
@@ -9,29 +8,20 @@ namespace BattleTank.Bullet
 		[SerializeField] private BulletView bulletPrefab;
 		[SerializeField] private BulletList bulletSoList;
 		[SerializeField] private float waitTime;
-		private BulletModel bulletModel;
-		private BulletController bulletController;
-		private BulletsPoolService createBullet;
+		public BulletsPoolService bulletPool;
 		public Action<int> OnBulletFired;
 
 		private void Start()
 		{
-			createBullet = GetComponent<BulletsPoolService>();
-		}
-
-		IEnumerator ReturnBulletToPool(float _waitTime, BulletController _bulletController)
-		{
-			yield return new WaitForSeconds(_waitTime);
-			bulletController.SetVisible(false);
-			createBullet.ReturnItem(_bulletController);
+			bulletPool = GetComponent<BulletsPoolService>();
 		}
 
 		public void ShootTank(Transform _bulletSpawnTransform)
 		{
-			bulletController = createBullet.GetBullet(bulletPrefab);
+			BulletController bulletController;
+			bulletController = bulletPool.GetBullet(bulletPrefab);
 			bulletController.SetVisible(true);
 			bulletController.ShootBullet(_bulletSpawnTransform);
-			StartCoroutine(ReturnBulletToPool(waitTime, bulletController));
 		}
 
 		public BulletSO BulletRandomizer()

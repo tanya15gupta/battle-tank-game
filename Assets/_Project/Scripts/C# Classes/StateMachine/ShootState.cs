@@ -16,23 +16,14 @@ namespace BattleTank
 		}
 		public override void OnUpdate()
 		{
-			if (!IsPlayerInShootRange())
+			if (!enemyController.IsPlayerInShootRange())
 			{
 				EnterPatrolState();
 				return;
 			}
-			ShootingPlayerTank();
+			enemyController.ShootingPlayerTank();
 		}
-		private void ShootingPlayerTank()
-		{
-			enemyController.GetEnemyTankTransform().LookAt(TankService.instance.PlayerPosition());
-			shootCooldown += Time.deltaTime;
-			if (shootCooldown >= 2.0f)
-			{
-				shootCooldown = 0;
-				BulletService.instance.ShootTank(enemyController.GetBulletSpawnTransform());
-			}
-		}
+		
 		private void EnterPatrolState()
 		{
 			nextState = new PatrolState(enemyController);

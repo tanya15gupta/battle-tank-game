@@ -6,12 +6,16 @@ namespace BattleTank.Bullet
     {
         public float speed { get; private set; }
         public float damageAmount { get; private set; }
-        public float shotsFired { get; private set; }
+        public int shotsFired { get; private set; }
+        public float bulletLifeTime { get; private set; }
+        public GameObject explosionParticalEffect { get; private set; }
         public BulletModel(BulletSO _bulletSO)
 		{
-            speed = _bulletSO.speed;
-            damageAmount = _bulletSO.damageDone;
-            shotsFired = _bulletSO.shotsFired;
+            speed = _bulletSO.Speed;
+            damageAmount = _bulletSO.DamageDone;
+            shotsFired = _bulletSO.ShotsFired;
+            bulletLifeTime = _bulletSO.BulletLifeTime;
+            explosionParticalEffect = _bulletSO.ExplosionParticalsEffect;
 		}
     }
 }

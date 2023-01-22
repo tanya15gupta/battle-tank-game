@@ -10,12 +10,14 @@ namespace BattleTank
 		}
 		public override void OnUpdate()
 		{
+			if (TankService.instance.PlayerPosition() == null)
+				return;
 			agent.SetDestination(TankService.instance.PlayerPosition());
 			if(agent.hasPath)
 			{
-				if(IsPlayerInShootRange())
+				if(enemyController.IsPlayerInShootRange())
 					EnterShootingState();
-				else if(!IsPlayerInChaseRange() || !IsPlayerInShootRange())
+				else if(!enemyController.IsPlayerInChaseRange() || !enemyController.IsPlayerInShootRange())
 					EnterPatrolState();
 			}
 		}
