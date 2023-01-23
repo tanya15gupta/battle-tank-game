@@ -7,7 +7,7 @@ namespace BattleTank
 	public class TankController
 	{
 		private TankModel tankModel;
-		private TankView tankView;
+		private TankView tankPrefab;
 		private Vector3 moveDirection;
 		private Transform tankSpawnPoint;
 
@@ -15,18 +15,24 @@ namespace BattleTank
 		{
 			tankModel = _tankModel;
 			tankSpawnPoint = _spawnPoint;
-			tankView = GameObject.Instantiate<TankView>(_tankView, tankSpawnPoint);
+			tankPrefab = GameObject.Instantiate<TankView>(_tankView, tankSpawnPoint);
 			ChangeTankColour();
 			moveDirection = Vector3.zero;
-			tankView.SetController(this);
+			tankPrefab.SetController(this);
+			TankService.instance.SetVirtualCamera(tankPrefab.transform);
 		}
-		public Vector3 GetTankTransform() => tankView.transform.position;
-		public Transform GetBulletSpawnTransform() => tankView.GetBulletSpawnPoint();
+		public Vector3 GetTankTransform()
+		{
+			if (tankPrefab == null)
+				return Vector3.positiveInfinity;
+			return tankPrefab.transform.position;
+		}
+		public Transform GetBulletSpawnTransform() => tankPrefab.GetBulletSpawnPoint();
 		private void ChangeTankColour()
 		{
-			for(int i = 0; i < tankView.GetTankBody().childCount; i++)
+			for(int i = 0; i < tankPrefab.GetTankBody().childCount; i++)
 			{
-				tankView.GetTankBody().GetChild(i).GetComponent<MeshRenderer>().material = tankModel.tankMaterial;
+				tankPrefab.GetTankBody().GetChild(i).GetComponent<MeshRenderer>().material = tankModel.tankMaterial;
 			}
 		}
 
@@ -41,15 +47,14 @@ namespace BattleTank
 		{
 			moveDirection.x = UIService.instance.GetJoystickHorizontal();
 			moveDirection.z = UIService.instance.GetJoystickVertical();
-			tankView.GetRigidbody().velocity = moveDirection * tankModel.tankSpeed * Time.fixedDeltaTime;
+			tankPrefab.GetRigidbody().velocity = moveDirection * tankModel.tankSpeed * Time.fixedDeltaTime;
 			if(moveDirection != Vector3.zero)
-				tankView.transform.forward = (moveDirection);
+				tankPrefab.transform.forward = (moveDirection);
 		}
 
-		public void PlayerHit()
+		public void PlayerDeath()
 		{
-			DestroyScene.instance.SceneDestruction(tankView.gameObject);
-			//Object.Destroy(tankView.gameObject);
+			Object.Destroy(tankPrefab.gameObject);
 		}
 	}
 }

@@ -8,27 +8,27 @@ namespace BattleTank
 		private EnemyController enemyTankController;
 		private NavMeshAgent agent;
 		public NavMeshAgent EnemyTankAgent() => agent;
-		public void SetController(EnemyController _enemyTankController)
-		{
-			enemyTankController = _enemyTankController;
-		}
+		
 		private void Start()
 		{
 			agent = gameObject.GetComponent<NavMeshAgent>();
+			TankService.instance.OnPlayerDeath += DestroyTank;
 		}
 		private void Update()
 		{
 			enemyTankController.MoveTankAI();
 		}
-
-		public override void TankGotHit()
+		public void SetController(EnemyController _enemyTankController)
+		{
+			enemyTankController = _enemyTankController;
+		}
+		public override void DestroyTank()
 		{
 			enemyTankController.EnemyReceivedHit();
 		}
-
-		public void DestroySelf()
+		private void OnDisable()
 		{
-			Destroy(gameObject);
+			TankService.instance.OnPlayerDeath -= DestroyTank;
 		}
 	}
 }

@@ -1,30 +1,33 @@
 using UnityEngine;
 using System;
+
 namespace BattleTank.Bullet
 {
 	public class BulletService : GenericSingleton<BulletService>
 	{
 		[SerializeField] private BulletView bulletPrefab;
 		[SerializeField] private BulletList bulletSoList;
-		[SerializeField] private BulletSO bulletSO;
-		private BulletController bulletController;
+		[SerializeField] private float waitTime;
+		public BulletsPoolService bulletPool;
 		public Action<int> OnBulletFired;
 
 		private void Start()
 		{
-			bulletController = new BulletController(bulletPrefab, new BulletModel(BulletRandomizer()) );
+			bulletPool = GetComponent<BulletsPoolService>();
 		}
 
 		public void ShootTank(Transform _bulletSpawnTransform)
 		{
+			BulletController bulletController;
+			bulletController = bulletPool.GetBullet(bulletPrefab);
+			bulletController.SetVisible(true);
 			bulletController.ShootBullet(_bulletSpawnTransform);
 		}
 
-		private BulletSO BulletRandomizer()
+		public BulletSO BulletRandomizer()
 		{
 			int index = UnityEngine.Random.Range(0, bulletSoList.bulletsList.Count);
-			bulletSO = bulletSoList.bulletsList[index];
-			return bulletSO;
+			return bulletSoList.bulletsList[index];
 		}
 	}
 }

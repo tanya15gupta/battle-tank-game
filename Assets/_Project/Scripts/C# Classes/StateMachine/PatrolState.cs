@@ -17,7 +17,7 @@ namespace BattleTank
 		}
 		public override void OnUpdate()
 		{
-			if (IsPlayerInChaseRange())
+			if (enemyController.IsPlayerInChaseRange())
 			{
 				EnterChaseState();
 				return;

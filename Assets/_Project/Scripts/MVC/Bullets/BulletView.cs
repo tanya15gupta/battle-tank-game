@@ -1,37 +1,39 @@
+using System.Collections;
 using UnityEngine;
 
 namespace BattleTank.Bullet
 {
 	public class BulletView : MonoBehaviour
 	{
-		[SerializeField] private float destroyTimer;
 		private Rigidbody bulletRigidBody;
 		private BulletController bulletController;
+		private Coroutine bulletRoutine;
+		public GameObject shellExplosion;
+		public Rigidbody GetBulletRigidBody() => bulletRigidBody;
 		private void Awake()
 		{
-			destroyTimer = .8f;
 			bulletRigidBody = gameObject.GetComponent<Rigidbody>();
-		}
-		public Rigidbody GetBulletRigidBody() => bulletRigidBody;
-
-		public void SetBulletController(BulletController _bulletController)
-		{
-			bulletController = _bulletController;
 		}
 		private void OnCollisionEnter(Collision collision)
 		{
+ 			bulletRoutine = StartCoroutine(bulletController.ReturnBulletRoutine());
 			if (collision.gameObject.TryGetComponent<GenericViewForTanks>(out GenericViewForTanks component))
 			{
-				component.TankGotHit();
+				component.DestroyTank();
 			}
-			Destroy(gameObject);
+		}
+		private void OnDisable()
+		{
+			StopCoroutine(bulletRoutine);
 		}
 
-		private void Update()
+		public void ToggleActive(bool _isOn)
 		{
-			destroyTimer -= Time.deltaTime;
-			if (destroyTimer <= 0)
-				Destroy(gameObject);
+			gameObject.SetActive(_isOn);
+		}
+		public void SetController(BulletController _bulletController)
+		{
+			bulletController = _bulletController;
 		}
 	}
 }
