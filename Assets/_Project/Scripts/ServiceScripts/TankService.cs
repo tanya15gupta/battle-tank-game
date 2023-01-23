@@ -1,6 +1,4 @@
 using UnityEngine;
-using BattleTank.UI;
-using Cinemachine;
 namespace BattleTank
 {
 	public class TankService : GenericSingleton<TankService>
