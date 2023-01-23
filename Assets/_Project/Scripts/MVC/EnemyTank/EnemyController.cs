@@ -67,10 +67,10 @@ namespace BattleTank
 		{
 			GetEnemyTankTransform().LookAt(TankService.instance.PlayerPosition());
 			shootCooldown += Time.deltaTime;
-			if (shootCooldown >= 2.0f)
+			if (shootCooldown >= enemyModel.ShootCoolDown)
 			{
 				shootCooldown = 0;
-				BattleTank.Bullet.BulletService.instance.ShootTank(GetBulletSpawnTransform());
+				Bullet.BulletService.instance.ShootTank(GetBulletSpawnTransform());
 			}
 		}
 	}

@@ -18,8 +18,8 @@ MonoBehaviour:
   health: 50
   tankMaterial: {fileID: 2100000, guid: 7f0353c5e59b7ee49bc9801eda7aa3cd, type: 2}
   tankType: 2
-  aIShootingDistance: 8
-  aIVisibilityRadius: 15
+  aIShootingDistance: 15
+  aIVisibilityRadius: 25
   checkPoints:
   - {fileID: 5057514606534622726, guid: 8a7511f7e5e15cd44bda16af7ab5bfea, type: 3}
   - {fileID: 1819447978936571108, guid: 361333afb3fa6cd4e923cc8f7eddcc04, type: 3}

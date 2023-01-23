@@ -7,17 +7,16 @@ namespace BattleTank.Bullet
 	{
 		private BulletModel bulletModel;
 		private BulletView bulletPrfab;
-		private bool shootPressed;
-		private GameObject explosionEffect;
+		private ParticleSystem shellExplosionPS;
 		public BulletController(BulletView _bulletPrfab, BulletModel _bulletModel)
 		{
 			bulletModel = _bulletModel;
 			bulletPrfab = GameObject.Instantiate<BulletView>(_bulletPrfab);
-			explosionEffect = GameObject.Instantiate(bulletModel.explosionParticalEffect);
+			bulletPrfab.shellExplosion = GameObject.Instantiate(bulletModel.explosionParticalEffect);
+			shellExplosionPS = bulletPrfab.shellExplosion.GetComponent<ParticleSystem>();
+			shellExplosionPS.Stop();
 			bulletPrfab.SetController(this);
 		}
-
-		public bool IsShootPressed() => shootPressed;
 		public void SetVisible(bool _isActive)
 		{
 			bulletPrfab.ToggleActive(_isActive);
@@ -25,7 +24,7 @@ namespace BattleTank.Bullet
 		public void ShootBullet(Transform _bulletSpawnPoint)
 		{
 			bulletPrfab.transform.SetPositionAndRotation(_bulletSpawnPoint.position, _bulletSpawnPoint.rotation);
-			bulletPrfab.GetBulletRigidBody().AddForce(bulletPrfab.transform.forward * bulletModel.speed * Time.deltaTime,ForceMode.Impulse);
+			bulletPrfab.GetBulletRigidBody().AddForce(bulletPrfab.transform.forward * bulletModel.speed * Time.deltaTime, ForceMode.Force);
 		}
 
 		public IEnumerator ReturnBulletRoutine()
@@ -34,23 +33,20 @@ namespace BattleTank.Bullet
 			yield return new WaitForSeconds(bulletModel.bulletLifeTime);
 			ReturnBulletToPool();
 		}
-		private void ExplosionEffect()
+		public void ExplosionEffect()
 		{
-			explosionEffect.SetActive(true);
-			bulletModel.explosionParticalEffect.GetComponent<ParticleSystem>().Play(true);
+			bulletPrfab.GetComponent<MeshRenderer>().enabled = false;
+			bulletPrfab.shellExplosion.SetActive(true);
+			shellExplosionPS.transform.position = bulletPrfab.transform.position;
+			shellExplosionPS.Play(true);
 		}
 		private void ReturnBulletToPool()
 		{
-			SetObjectInteractable(true);
+			bulletPrfab.GetComponent<MeshRenderer>().enabled = true;
 			SetVisible(false);
 			BulletService.instance.bulletPool.ReturnItem(this);
-			explosionEffect.SetActive(false);
-			bulletModel.explosionParticalEffect.GetComponent<ParticleSystem>().Stop(true);
-		}
-		public void SetObjectInteractable(bool _isTrue)
-		{
-			bulletPrfab.GetComponent<MeshRenderer>().enabled = _isTrue;
-			bulletPrfab.GetBulletRigidBody().isKinematic = _isTrue;
+			bulletPrfab.shellExplosion.SetActive(false);
+			shellExplosionPS.Stop(true);
 		}
 	}
 }
