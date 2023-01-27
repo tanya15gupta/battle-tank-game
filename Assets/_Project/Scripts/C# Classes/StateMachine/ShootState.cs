@@ -23,7 +23,7 @@ namespace BattleTank
 			}
 			enemyController.ShootingPlayerTank();
 		}
-		
+
 		private void EnterPatrolState()
 		{
 			nextState = new PatrolState(enemyController);

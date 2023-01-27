@@ -16,8 +16,8 @@ namespace BattleTank.Bullet
 		}
 		private void OnCollisionEnter(Collision collision)
 		{
- 			bulletRoutine = StartCoroutine(bulletController.ReturnBulletRoutine());
-			if (collision.gameObject.TryGetComponent<GenericViewForTanks>(out GenericViewForTanks component))
+			bulletRoutine = StartCoroutine(bulletController.ReturnBulletRoutine());
+			if (collision.gameObject.TryGetComponent<BaseTankView>(out BaseTankView component))
 			{
 				component.DestroyTank();
 			}

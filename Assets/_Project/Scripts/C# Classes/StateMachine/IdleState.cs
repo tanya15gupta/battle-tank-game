@@ -9,13 +9,13 @@ namespace BattleTank
 		}
 		public override void OnUpdate()
 		{
-			if(Random.Range(0,100) <= 10)
+			if (Random.Range(0, 100) <= 10)
 			{
 				EnterPatrolState();
 			}
 		}
 		private void EnterPatrolState()
-		{ 
+		{
 			nextState = new PatrolState(enemyController);
 			currentStage = EVENT.EXIT;
 		}

@@ -4,8 +4,8 @@ using BattleTank.Bullet;
 
 namespace BattleTank
 {
-    public class AchievementSystem : GenericSingleton<AchievementSystem>
-    {
+	public class AchievementSystem : GenericSingleton<AchievementSystem>
+	{
 		[SerializeField] private TextMeshProUGUI achievementTextTMP;
 		[SerializeField] private GameObject achievementPanel;
 		private float deactivationTime;
@@ -23,7 +23,7 @@ namespace BattleTank
 		private void Update()
 		{
 			deactivationTime += Time.deltaTime;
-			if(deactivationTime >= 5.0f)
+			if (deactivationTime >= 5.0f)
 			{
 				AchievementPanel(false);
 				deactivationTime = 0;
@@ -32,7 +32,7 @@ namespace BattleTank
 		private void BulletFiringAchievement(int _bulletCount)
 		{
 			AchievementPanel(true);
-			switch(_bulletCount)
+			switch (_bulletCount)
 			{
 				case 1:
 				achievementText = "Fast Learner!";

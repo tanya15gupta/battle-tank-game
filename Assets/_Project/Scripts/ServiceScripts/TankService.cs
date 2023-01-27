@@ -19,11 +19,11 @@ namespace BattleTank
 		{
 			virtualCamera.Follow = _follow;
 		}
-		public Vector3 PlayerPosition() => tankController.GetTankTransform();
+		public Vector3 GetPlayerPosition() => tankController.GetTankTransform();
 		public Transform GetBulletTransform() => tankController.GetBulletSpawnTransform();
 		private TankScriptableObject TankRandomizer()
 		{
-			int index = UnityEngine.Random.Range(0, tankSoList.list.Count );
+			int index = UnityEngine.Random.Range(0, tankSoList.list.Count);
 			tankSO = tankSoList.list[index];
 			return tankSO;
 		}

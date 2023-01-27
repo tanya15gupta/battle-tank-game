@@ -5,19 +5,19 @@ namespace BattleTank
 		public ChaseState(EnemyController _enemyController) : base(_enemyController)
 		{
 			stateName = STATE.CHASE;
-			agent.speed = 8;
+			agent.speed = enemyController.GetTankSpeed() / 100;
 			agent.isStopped = false;
 		}
 		public override void OnUpdate()
 		{
-			if (TankService.instance.PlayerPosition() == null)
+			if (TankService.instance.GetPlayerPosition() == null)
 				return;
-			agent.SetDestination(TankService.instance.PlayerPosition());
-			if(agent.hasPath)
+			agent.SetDestination(TankService.instance.GetPlayerPosition());
+			if (agent.hasPath)
 			{
-				if(enemyController.IsPlayerInShootRange())
+				if (enemyController.IsPlayerInShootRange())
 					EnterShootingState();
-				else if(!enemyController.IsPlayerInChaseRange() || !enemyController.IsPlayerInShootRange())
+				else if (!enemyController.IsPlayerInChaseRange() || !enemyController.IsPlayerInShootRange())
 					EnterPatrolState();
 			}
 		}

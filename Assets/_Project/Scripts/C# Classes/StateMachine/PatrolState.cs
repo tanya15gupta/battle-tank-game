@@ -1,13 +1,13 @@
 
 namespace BattleTank
 {
-    public class PatrolState : StateBaseClass
+	public class PatrolState : StateBaseClass
 	{
 		private int currentIndex = -1;
 		public PatrolState(EnemyController _enemyController) : base(_enemyController)
 		{
 			stateName = STATE.PATROL;
-			agent.speed = enemyController.GetTankSpeed()/100;
+			agent.speed = enemyController.GetTankSpeed() / 100;
 			agent.isStopped = false;
 		}
 		public override void OnEnter()
@@ -36,7 +36,7 @@ namespace BattleTank
 			}
 		}
 		private void EnterChaseState()
-		{ 
+		{
 			nextState = new ChaseState(enemyController);
 			currentStage = EVENT.EXIT;
 		}

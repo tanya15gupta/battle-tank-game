@@ -3,12 +3,12 @@ using UnityEngine.AI;
 
 namespace BattleTank
 {
-	public class EnemyView : GenericViewForTanks
+	public class EnemyView : BaseTankView
 	{
 		private EnemyController enemyTankController;
 		private NavMeshAgent agent;
 		public NavMeshAgent EnemyTankAgent() => agent;
-		
+
 		private void Start()
 		{
 			agent = gameObject.GetComponent<NavMeshAgent>();

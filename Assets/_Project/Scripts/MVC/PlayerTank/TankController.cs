@@ -30,7 +30,7 @@ namespace BattleTank
 		public Transform GetBulletSpawnTransform() => tankPrefab.GetBulletSpawnPoint();
 		private void ChangeTankColour()
 		{
-			for(int i = 0; i < tankPrefab.GetTankBody().childCount; i++)
+			for (int i = 0; i < tankPrefab.GetTankBody().childCount; i++)
 			{
 				tankPrefab.GetTankBody().GetChild(i).GetComponent<MeshRenderer>().material = tankModel.tankMaterial;
 			}
@@ -48,7 +48,7 @@ namespace BattleTank
 			moveDirection.x = UIService.instance.GetJoystickHorizontal();
 			moveDirection.z = UIService.instance.GetJoystickVertical();
 			tankPrefab.GetRigidbody().velocity = moveDirection * tankModel.tankSpeed * Time.fixedDeltaTime;
-			if(moveDirection != Vector3.zero)
+			if (moveDirection != Vector3.zero)
 				tankPrefab.transform.forward = (moveDirection);
 		}
 

@@ -1,7 +1,7 @@
 using UnityEngine;
 namespace BattleTank
 {
-	public class TankView : GenericViewForTanks
+	public class TankView : BaseTankView
 	{
 		private TankController tankController;
 
@@ -9,6 +9,7 @@ namespace BattleTank
 		{
 			TankService.instance.OnPlayerDeath += DestroyTank;
 		}
+
 
 		private void FixedUpdate()
 		{

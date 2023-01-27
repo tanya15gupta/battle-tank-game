@@ -4,51 +4,51 @@ using System.Collections.Generic;
 
 namespace BattleTank
 {
-    public class StateBaseClass
-    {
-        public enum STATE   {   IDLE, PATROL, CHASE, ATTACK   }
+	public class StateBaseClass
+	{
+		public enum STATE { IDLE, PATROL, CHASE, ATTACK }
 
-        public enum EVENT   {   ENTER, UPDATE, EXIT    }
+		public enum EVENT { ENTER, UPDATE, EXIT }
 
-        protected STATE stateName;
-        protected EVENT currentStage;
-        protected StateBaseClass nextState;
-        protected List<Transform> patrollingPoints;
-        protected EnemyController enemyController;
-        protected NavMeshAgent agent;
+		protected STATE stateName;
+		protected EVENT currentStage;
+		protected StateBaseClass nextState;
+		protected List<Transform> patrollingPoints;
+		protected EnemyController enemyController;
+		protected NavMeshAgent agent;
 
-        public StateBaseClass(EnemyController _enemyController)
+		public StateBaseClass(EnemyController _enemyController)
 		{
-            enemyController = _enemyController;
-            agent = enemyController.GetNavmeshAgent();
-            patrollingPoints = enemyController.GetPatrolPoints();
+			enemyController = _enemyController;
+			agent = enemyController.GetNavmeshAgent();
+			patrollingPoints = enemyController.GetPatrolPoints();
 		}
 
-        public virtual void OnEnter()
+		public virtual void OnEnter()
 		{
-            currentStage = EVENT.UPDATE;
-		}
-        
-        public virtual void OnUpdate()
-		{
-            currentStage = EVENT.UPDATE;
+			currentStage = EVENT.UPDATE;
 		}
 
-        public virtual void OnExit()
+		public virtual void OnUpdate()
 		{
-            currentStage = EVENT.EXIT;
+			currentStage = EVENT.UPDATE;
 		}
 
-        public StateBaseClass Processing()
+		public virtual void OnExit()
 		{
-            if(currentStage == EVENT.ENTER) { OnEnter(); }
-            if(currentStage == EVENT.UPDATE) { OnUpdate(); }
-            if(currentStage == EVENT.EXIT)
+			currentStage = EVENT.EXIT;
+		}
+
+		public StateBaseClass Processing()
+		{
+			if (currentStage == EVENT.ENTER) { OnEnter(); }
+			if (currentStage == EVENT.UPDATE) { OnUpdate(); }
+			if (currentStage == EVENT.EXIT)
 			{
-                OnExit();
-                return nextState;
+				OnExit();
+				return nextState;
 			}
-            return this;
+			return this;
 		}
-    }
+	}
 }

@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace BattleTank
 {
-    public class GenericPool<T> : GenericSingleton<GenericPool<T>> where T : class
-    {
-        private List<PooledItems<T>> itemsInPool;
+	public class GenericPool<T> : GenericSingleton<GenericPool<T>> where T : class
+	{
+		private List<PooledItems<T>> itemsInPool;
 
 		private void Start()
 		{
@@ -14,12 +14,12 @@ namespace BattleTank
 
 		public virtual void ReturnItem(T _item)
 		{
-			PooledItems<T> pooledItem  = itemsInPool.Find(item => item.item.Equals(_item));
+			PooledItems<T> pooledItem = itemsInPool.Find(item => item.item.Equals(_item));
 			pooledItem.isUsed = false;
 			return;
 		}
 
-        public virtual T GetItem()
+		public virtual T GetItem()
 		{
 			if (itemsInPool.Count > 0)
 			{
@@ -49,8 +49,8 @@ namespace BattleTank
 
 		private class PooledItems<T>
 		{
-            public T item;
-            public bool isUsed;
+			public T item;
+			public bool isUsed;
 		}
-    }
+	}
 }

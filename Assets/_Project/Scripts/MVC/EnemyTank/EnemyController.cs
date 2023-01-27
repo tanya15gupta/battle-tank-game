@@ -40,9 +40,9 @@ namespace BattleTank
 		}
 		private float DistanceBetweenTanks()
 		{
-			if (TankService.instance.PlayerPosition() == null)
+			if (TankService.instance.GetPlayerPosition() == null)
 				return Mathf.Infinity;
-			float distance = Vector3.Distance(TankService.instance.PlayerPosition(), enemyTankPrefab.transform.position);
+			float distance = Vector3.Distance(TankService.instance.GetPlayerPosition(), enemyTankPrefab.transform.position);
 			return distance;
 		}
 		public void MoveTankAI()
@@ -65,7 +65,7 @@ namespace BattleTank
 		}
 		public void ShootingPlayerTank()
 		{
-			GetEnemyTankTransform().LookAt(TankService.instance.PlayerPosition());
+			GetEnemyTankTransform().LookAt(TankService.instance.GetPlayerPosition());
 			shootCooldown += Time.deltaTime;
 			if (shootCooldown >= enemyModel.ShootCoolDown)
 			{
